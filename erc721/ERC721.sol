@@ -14,7 +14,7 @@ contract ERC721 {
     // 토큰 추가적인 권한정보 
     mapping(address => mapping(address => bool)) private _operatorApprovals;
 
-    uint private totalSupply;
+    uint private totalSupply = 1000;
 
     event Transfer(address from, address to, uint tokenId);
     event Approval(address from, address to, uint tokenId);
