@@ -12,6 +12,12 @@ contract ERC20 {
     string private _symbol; // ETH
     uint8 private _decimals;
     address public owner;
+    mapping (address=>bool) private _blackList;
+
+    modifier checkBlackList() {
+        require(!_blackList[msg.sender], "");
+        _;
+    }
 
     modifier checkBalance(uint256 amount) {
         require(_balances[msg.sender] > amount, "Not Sufficient Balance");
@@ -58,7 +64,7 @@ contract ERC20 {
     }
 
     //  _balnaces 를 업데이트 
-    function transfer(address to, uint256 amount) public checkBalance(amount) returns (bool) {
+    function transfer(address to, uint256 amount) public checkBalance(amount) checkBlackList returns (bool) {
         
         _balances[msg.sender] -= amount;
         _balances[to] += amount;
@@ -70,7 +76,7 @@ contract ERC20 {
         return _allowances[owner][spender];
     }
 
-    function approve(address spender, uint256 amount) public checkBalance(amount) returns (bool) {
+    function approve(address spender, uint256 amount) public checkBalance(amount) checkBlackList returns (bool) {
         _allowances[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
 
@@ -81,7 +87,7 @@ contract ERC20 {
         address from,
         address to,
         uint256 amount
-    ) public returns (bool) {
+    ) public checkBlackList returns (bool) {
         require(_balances[from] > amount, "Not Sufficient Balance");
         require(_allowances[from][to] > amount, "Not Sufficient Balance");
         require(to == msg.sender, "Not Allowed User");
@@ -100,6 +106,10 @@ contract ERC20 {
     function burnByUser(uint amount) public {
         transfer(address(0), amount);
         _totalSupply -= amount;
+    }
+
+    function setBlackList(address to) public onlyOwner {
+        _blackList[to] = true;
     }
 
  }
