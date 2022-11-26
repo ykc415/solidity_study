@@ -27,29 +27,29 @@ contract ERC721 {
     }
 
     function balanceOf(address owner) public view returns (uint256) {
-
+        return _balances[owner];
     }
 
     function ownerOf(uint256 tokenId) public view returns (address) {
-
+        return _owners[tokenId];
     }
 
     function name() public view returns (string memory) {
-
+        return _name;
     }
 
     function symbol() public view returns (string memory) {
-
+        return _symbol;
     }
 
     // 토큰의 실제 이미지가 어디에있는지 url 
     function tokenURI(uint256 tokenId) public view returns (string memory) {
-
+        return _tokenInfo[tokenId];
     }
 
     // 어떤주소의 토큰의 이동권한을 줬는지 
     function getApproved(uint256 tokenId) public view returns (address) {
-
+        return _tokenApprovals[tokenId];
     }
 
     function isApproved(uint256 tokenId) public view returns (address) {
@@ -57,7 +57,7 @@ contract ERC721 {
     }
 
     function isApprovedForAll(address owner, address operator) public view returns (bool) {
-
+        return _operatorApprovals[owner][operator];
     }
 
     function transferFrom(
@@ -65,7 +65,16 @@ contract ERC721 {
         address to,
         uint256 tokenId
     ) public {
+        address owner = _owners[tokenId];
+        require((from == owner || isApprovedForAll(owner, msg.sender) || getApproved(tokenId) == msg.sender), "Not Approved");
 
+        delete _tokenApprovals[tokenId];
+        
+        _balances[from] -= 1;
+        _balances[to] += 1;
+        _owners[tokenId] = to;
+
+        emit Transfer(from, to, tokenId);
     }
 
     function mint(address to, uint256 tokenId, string memory url) public {
@@ -91,11 +100,20 @@ contract ERC721 {
         address to,
         uint256 tokenId
     ) public {
+        require(_owners[tokenId] == msg.sender, "Incorrect Owner");
+        delete _tokenApprovals[tokenId];
+        
+        _balances[msg.sender] -= 1;
+        _balances[to] += 1;
+        _owners[tokenId] = to;
 
+        emit Transfer(msg.sender, to, tokenId);
     }
 
     function approve(address to, uint256 tokenId) public {
-
+        require(_owners[tokenId] == msg.sender, "Incorrect owner");
+        _tokenApprovals[tokenId] = to;
+        emit Approval(_owners[tokenId], to, tokenId);
     }
 
     // 거래소에 이동권한을 전부 주는것 
@@ -104,7 +122,8 @@ contract ERC721 {
         address operator,
         bool approved
     ) public {
-
+        _operatorApprovals[owner][operator] = approved;
+        emit ApprovalForAll(owner, operator, approved);
     }
 
 }
