@@ -1,0 +1,58 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"name": "roll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"chainlink/random.sol": "IDice"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"chainlink/random.sol": {
+			"keccak256": "0xd067262ccad95ada78d56d7ea790b64c3bf6db60f3b660fc3f89c71b53ed6d5d",
+			"urls": [
+				"bzz-raw://6a40fd199855e35e941366168f24003ed847531dce5da93bf50219d8ac59b0ae",
+				"dweb:/ipfs/QmSyTHiExgzjWndrBzFhAfEMmw2f7SZikkDeppGkkHD6x8"
+			]
+		}
+	},
+	"version": 1
+}

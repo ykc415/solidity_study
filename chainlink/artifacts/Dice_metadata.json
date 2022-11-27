@@ -1,0 +1,80 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "payable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "getWinner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint8",
+						"name": "dice_number",
+						"type": "uint8"
+					}
+				],
+				"name": "roll",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"chainlink/random.sol": "Dice"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"chainlink/random.sol": {
+			"keccak256": "0xd067262ccad95ada78d56d7ea790b64c3bf6db60f3b660fc3f89c71b53ed6d5d",
+			"urls": [
+				"bzz-raw://6a40fd199855e35e941366168f24003ed847531dce5da93bf50219d8ac59b0ae",
+				"dweb:/ipfs/QmSyTHiExgzjWndrBzFhAfEMmw2f7SZikkDeppGkkHD6x8"
+			]
+		}
+	},
+	"version": 1
+}
